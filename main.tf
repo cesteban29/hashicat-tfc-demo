@@ -40,6 +40,14 @@ module "hashicat" {
   instance_ami = data.hcp_packer_image.ubuntu_us_east_1.cloud_image_id
 }
 
+module "hashicat-2" {
+  source  = "app.terraform.io/cesteban-tfc/hashicat/aws"
+  version = "1.9.1"
+  instance_type = var.instance_type
+  region = var.region
+  instance_ami = data.hcp_packer_image.ubuntu_us_east_1.cloud_image_id
+}
+
 check "health_check" {
   data "http" "hashicat_web" {
     url = module.hashicat.catapp_url
